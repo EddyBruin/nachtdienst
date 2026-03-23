@@ -7,20 +7,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #0F1923;
-      --card: #182433;
-      --card2: #1E2D40;
-      --border: #263649;
-      --text: #EEF2F7;
-      --mid: #7A90A8;
-      --green: #22C55E;
-      --green-bg: #0F2E1C;
+      --bg:           #0F1923;
+      --card:         #182433;
+      --card2:        #1E2D40;
+      --border:       #263649;
+      --text:         #EEF2F7;
+      --mid:          #7A90A8;
+      --green:        #22C55E;
+      --green-bg:     #0F2E1C;
       --green-border: #16532E;
-      --red: #F97316;
-      --red-bg: #2A1506;
-      --red-border: #7C3209;
-      --yellow: #FBBF24;
-      --accent: #3B82F6;
+      --orange:       #F97316;
+      --orange-bg:    #2A1506;
+      --orange-border:#7C3209;
+      --yellow:       #FBBF24;
+      --accent:       #3B82F6;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,7 +32,6 @@
       min-height: 100vh;
     }
 
-    /* Starfield background */
     body::before {
       content: '';
       position: fixed;
@@ -56,10 +55,7 @@
       padding: 28px 20px 80px;
     }
 
-    /* Header */
-    header {
-      margin-bottom: 28px;
-    }
+    header { margin-bottom: 28px; }
 
     .header-top {
       display: flex;
@@ -68,8 +64,6 @@
       gap: 16px;
       flex-wrap: wrap;
     }
-
-    .header-left {}
 
     .eyebrow {
       font-size: 11px;
@@ -90,6 +84,29 @@
 
     h1 .moon { color: var(--yellow); }
 
+    .connection-status {
+      font-size: 12px;
+      color: var(--mid);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+    .connection-status.offline .status-dot { background: var(--orange); animation: none; }
+
+    /* Progress ring */
     .progress-ring-wrap {
       display: flex;
       flex-direction: column;
@@ -97,12 +114,10 @@
       gap: 4px;
     }
 
-    .progress-ring {
-      transform: rotate(-90deg);
-    }
-
+    .progress-ring { transform: rotate(-90deg); }
     .ring-bg { fill: none; stroke: var(--border); stroke-width: 6; }
-    .ring-fg { fill: none; stroke: var(--green); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
+    .ring-forest { fill: none; stroke: var(--orange); stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
+    .ring-bed    { fill: none; stroke: var(--green);  stroke-width: 6; stroke-linecap: round; transition: stroke-dashoffset 0.4s ease; }
 
     .ring-label {
       font-family: 'Syne', sans-serif;
@@ -113,10 +128,10 @@
       text-transform: uppercase;
     }
 
-    /* Stats bar */
+    /* Stats */
     .stats {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin-top: 20px;
       flex-wrap: wrap;
     }
@@ -125,28 +140,23 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 12px 18px;
+      padding: 12px 16px;
       flex: 1;
-      min-width: 100px;
+      min-width: 80px;
     }
 
     .stat-num {
       font-family: 'Syne', sans-serif;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 800;
       line-height: 1;
     }
 
-    .stat-num.green { color: var(--green); }
-    .stat-num.red { color: var(--red); }
-    .stat-num.mid { color: var(--mid); }
+    .stat-num.green  { color: var(--green); }
+    .stat-num.orange { color: var(--orange); }
+    .stat-num.mid    { color: var(--mid); }
 
-    .stat-label {
-      font-size: 12px;
-      color: var(--mid);
-      font-weight: 600;
-      margin-top: 3px;
-    }
+    .stat-label { font-size: 11px; color: var(--mid); font-weight: 600; margin-top: 3px; }
 
     /* Controls */
     .controls {
@@ -156,20 +166,12 @@
       flex-wrap: wrap;
     }
 
-    .search-wrap {
-      flex: 1;
-      min-width: 180px;
-      position: relative;
-    }
+    .search-wrap { flex: 1; min-width: 180px; position: relative; }
 
     .search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
+      position: absolute; left: 14px; top: 50%;
       transform: translateY(-50%);
-      color: var(--mid);
-      font-size: 15px;
-      pointer-events: none;
+      color: var(--mid); font-size: 15px; pointer-events: none;
     }
 
     .search-input {
@@ -179,10 +181,8 @@
       border-radius: 12px;
       padding: 11px 14px 11px 40px;
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-      outline: none;
+      font-size: 14px; font-weight: 600;
+      color: var(--text); outline: none;
       transition: border-color 0.15s;
     }
 
@@ -194,63 +194,44 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 4px;
-      gap: 2px;
+      padding: 4px; gap: 2px;
     }
 
     .filter-btn {
       font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      padding: 7px 14px;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
-      color: var(--mid);
-      cursor: pointer;
-      transition: all 0.15s;
+      font-size: 12px; font-weight: 600;
+      padding: 7px 11px;
+      border-radius: 8px; border: none;
+      background: transparent; color: var(--mid);
+      cursor: pointer; transition: all 0.15s;
       white-space: nowrap;
     }
 
-    .filter-btn.active {
-      background: var(--card2);
-      color: var(--text);
-    }
+    .filter-btn.active { background: var(--card2); color: var(--text); }
 
     .btn-reset {
       font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 10px 18px;
-      border-radius: 12px;
-      border: 1px solid var(--red-border);
-      background: var(--red-bg);
-      color: var(--red);
-      cursor: pointer;
-      transition: all 0.15s;
-      white-space: nowrap;
+      font-size: 13px; font-weight: 700;
+      padding: 10px 18px; border-radius: 12px;
+      border: 1px solid var(--orange-border);
+      background: var(--orange-bg); color: var(--orange);
+      cursor: pointer; transition: all 0.15s; white-space: nowrap;
     }
 
     .btn-reset:hover { background: #3d1a07; }
 
-    /* List */
-    .kids-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    /* Kid rows */
+    .kids-list { display: flex; flex-direction: column; gap: 6px; }
 
     .kid-row {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 0;
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 14px 18px;
-      cursor: pointer;
-      transition: all 0.2s;
-      user-select: none;
+      overflow: hidden;
+      transition: border-color 0.2s, background 0.2s;
       animation: fadeIn 0.2s ease both;
     }
 
@@ -259,123 +240,154 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    .kid-row:hover { border-color: #3a5070; background: var(--card2); }
+    /* State colors */
+    .kid-row.state-forest {
+      background: var(--orange-bg);
+      border-color: var(--orange-border);
+    }
 
-    .kid-row.in-bed {
+    .kid-row.state-bed {
       background: var(--green-bg);
       border-color: var(--green-border);
     }
 
-    .kid-row.in-bed:hover { background: #122819; }
-
-    /* Checkbox */
-    .checkbox {
-      width: 26px;
-      height: 26px;
-      border-radius: 8px;
-      border: 2px solid var(--border);
-      background: var(--bg);
+    /* Two step buttons */
+    .step-btns {
+      display: flex;
+      flex-direction: column;
       flex-shrink: 0;
+    }
+
+    .step-btn {
+      width: 52px;
+      flex: 1;
+      border: none;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
-      font-size: 14px;
+      font-size: 16px;
+      transition: background 0.15s;
+      background: transparent;
+      padding: 0;
     }
 
-    .kid-row.in-bed .checkbox {
-      background: var(--green);
-      border-color: var(--green);
-      color: #fff;
+    /* Forest button (top) */
+    .step-btn.forest {
+      border-bottom: 1px solid var(--border);
+      color: var(--mid);
+    }
+
+    .step-btn.forest.done { color: var(--orange); }
+    .step-btn.forest:hover { background: rgba(249,115,22,0.08); }
+
+    /* Bed button (bottom) */
+    .step-btn.bed { color: var(--mid); }
+    .step-btn.bed.done  { color: var(--green); }
+    .step-btn.bed.locked { opacity: 0.25; cursor: not-allowed; }
+    .step-btn.bed:not(.locked):hover { background: rgba(34,197,94,0.08); }
+
+    /* Divider between step buttons */
+    .step-divider {
+      width: 1px;
+      align-self: stretch;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    /* Kid info */
+    .kid-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      min-width: 0;
     }
 
     .kid-info { flex: 1; min-width: 0; }
 
     .kid-name {
-      font-size: 15px;
-      font-weight: 700;
+      font-size: 15px; font-weight: 700;
       transition: color 0.2s;
     }
 
-    .kid-row.in-bed .kid-name {
+    .state-bed .kid-name {
       color: var(--green);
       text-decoration: line-through;
-      text-decoration-color: rgba(34,197,94,0.4);
+      text-decoration-color: rgba(34,197,94,0.35);
     }
 
-    .kid-sub {
-      font-size: 12px;
-      color: var(--mid);
-      font-weight: 500;
-      margin-top: 1px;
+    .state-forest .kid-name { color: var(--orange); }
+
+    .kid-sub { font-size: 12px; color: var(--mid); font-weight: 500; margin-top: 2px; }
+
+    /* Status pills */
+    .kid-status {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      flex-shrink: 0;
     }
 
-    .kid-badge {
-      font-size: 11px;
+    .pill {
+      font-size: 10px;
       font-weight: 700;
-      padding: 3px 10px;
+      padding: 2px 8px;
       border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .pill-forest      { background: rgba(249,115,22,0.15); color: var(--orange); }
+    .pill-forest-done { background: rgba(249,115,22,0.25); color: var(--orange); }
+    .pill-bed         { background: rgba(34,197,94,0.15);  color: var(--green); }
+    .pill-none        { background: rgba(255,255,255,0.05); color: var(--mid); }
+
+    .pill-time { font-size: 10px; color: var(--mid); font-weight: 600; }
+
+    /* Gender badge */
+    .kid-badge {
+      font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 6px;
     }
 
     .badge-j { background: rgba(59,130,246,0.15); color: #60a5fa; }
-    .badge-m { background: rgba(236,72,153,0.15); color: #f472b6; }
+    .badge-m { background: rgba(236,72,153,0.15);  color: #f472b6; }
 
-    .kid-time {
-      font-size: 11px;
-      color: var(--mid);
-      font-weight: 600;
-      text-align: right;
-      min-width: 44px;
-    }
-
-    .kid-row.in-bed .kid-time { color: var(--green); }
-
-    /* Empty state */
+    /* Empty */
     .empty {
-      text-align: center;
-      padding: 48px 20px;
-      color: var(--mid);
-      font-size: 15px;
-      font-weight: 600;
+      text-align: center; padding: 48px 20px;
+      color: var(--mid); font-size: 15px; font-weight: 600;
     }
 
     .empty .icon { font-size: 40px; display: block; margin-bottom: 10px; }
 
-    /* Status dot */
-    .status-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      display: inline-block;
-      margin-right: 6px;
-      animation: pulse 2s infinite;
+    /* Legend */
+    .legend {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
-
-    .connection-status {
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       font-size: 12px;
       color: var(--mid);
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      margin-top: 8px;
     }
 
-    .connection-status.offline .status-dot { background: var(--red); animation: none; }
+    .legend-icon { font-size: 16px; }
 
-    /* Reset modal */
+    /* Modal */
     .modal-overlay {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(0,0,0,0.7);
       z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       padding: 20px;
       backdrop-filter: blur(4px);
     }
@@ -385,57 +397,38 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: 28px;
-      max-width: 360px;
-      width: 100%;
+      max-width: 360px; width: 100%;
     }
 
     .modal h2 {
       font-family: 'Syne', sans-serif;
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 10px;
+      font-size: 22px; font-weight: 800; margin-bottom: 10px;
     }
 
-    .modal p {
-      color: var(--mid);
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
+    .modal p { color: var(--mid); font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
 
-    .modal-btns {
-      display: flex;
-      gap: 10px;
-    }
+    .modal-btns { display: flex; gap: 10px; }
 
     .btn-cancel {
       flex: 1;
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      padding: 12px;
-      border-radius: 12px;
+      font-size: 14px; font-weight: 700;
+      padding: 12px; border-radius: 12px;
       border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
-      cursor: pointer;
+      background: transparent; color: var(--text); cursor: pointer;
     }
 
     .btn-confirm-reset {
       flex: 1;
       font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      padding: 12px;
-      border-radius: 12px;
-      border: none;
-      background: var(--red);
-      color: #fff;
-      cursor: pointer;
+      font-size: 14px; font-weight: 700;
+      padding: 12px; border-radius: 12px;
+      border: none; background: var(--orange); color: #fff; cursor: pointer;
     }
 
     @media (max-width: 480px) {
-      .filter-btn { padding: 7px 10px; }
+      .filter-btn { padding: 7px 8px; font-size: 11px; }
+      .step-btn { width: 44px; }
     }
   </style>
 </head>
@@ -453,9 +446,14 @@
       </div>
       <div class="progress-ring-wrap">
         <svg class="progress-ring" width="72" height="72" viewBox="0 0 72 72">
-          <circle class="ring-bg" cx="36" cy="36" r="30"/>
-          <circle class="ring-fg" id="ring-fg" cx="36" cy="36" r="30"
+          <circle class="ring-bg"     cx="36" cy="36" r="30"/>
+          <circle class="ring-forest" cx="36" cy="36" r="30"
+            id="ring-forest"
             stroke-dasharray="188.5" stroke-dashoffset="188.5"/>
+          <circle class="ring-bed"    cx="36" cy="36" r="30"
+            id="ring-bed"
+            stroke-dasharray="188.5" stroke-dashoffset="188.5"
+            style="opacity:0.5"/>
         </svg>
         <div class="ring-label" id="ring-pct">0%</div>
       </div>
@@ -463,15 +461,19 @@
 
     <div class="stats">
       <div class="stat">
-        <div class="stat-num green" id="stat-in">0</div>
+        <div class="stat-num green"  id="stat-bed">0</div>
         <div class="stat-label">🛏️ In bed</div>
       </div>
       <div class="stat">
-        <div class="stat-num red" id="stat-out">0</div>
-        <div class="stat-label">🚶 Nog wakker</div>
+        <div class="stat-num orange" id="stat-forest">0</div>
+        <div class="stat-label">🌲 Uit bos</div>
       </div>
       <div class="stat">
-        <div class="stat-num mid" id="stat-total">0</div>
+        <div class="stat-num mid"    id="stat-bos">0</div>
+        <div class="stat-label">🌳 In bos</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num mid"    id="stat-total">0</div>
         <div class="stat-label">👥 Totaal</div>
       </div>
     </div>
@@ -483,11 +485,18 @@
       <input type="text" class="search-input" id="search" placeholder="Zoek op naam…" oninput="renderList()"/>
     </div>
     <div class="filter-btns">
-      <button class="filter-btn active" id="f-all" onclick="setFilter('all')">Alle</button>
-      <button class="filter-btn" id="f-out" onclick="setFilter('out')">Wakker</button>
-      <button class="filter-btn" id="f-in" onclick="setFilter('in')">In bed</button>
+      <button class="filter-btn active" id="f-all"    onclick="setFilter('all')">Alle</button>
+      <button class="filter-btn"        id="f-bos"    onclick="setFilter('bos')">🌳 Bos</button>
+      <button class="filter-btn"        id="f-forest" onclick="setFilter('forest')">🌲 Uit bos</button>
+      <button class="filter-btn"        id="f-bed"    onclick="setFilter('bed')">🛏️ Bed</button>
     </div>
     <button class="btn-reset" onclick="showReset()">↺ Reset</button>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-icon">🌳</span> Nog in het bos</div>
+    <div class="legend-item"><span class="legend-icon">🌲</span> Uit het bos, nog wakker</div>
+    <div class="legend-item"><span class="legend-icon">🛏️</span> In bed</div>
   </div>
 
   <div class="kids-list" id="kids-list">
@@ -500,7 +509,7 @@
 <div class="modal-overlay" id="modal" style="display:none;">
   <div class="modal">
     <h2>Alles resetten?</h2>
-    <p>Dit zet alle kinderen terug naar "nog wakker" op alle apparaten tegelijk.</p>
+    <p>Dit zet alle kinderen terug naar "in het bos" op alle apparaten tegelijk.</p>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="hideReset()">Annuleren</button>
       <button class="btn-confirm-reset" onclick="doReset()">Ja, reset alles</button>
@@ -508,7 +517,6 @@
   </div>
 </div>
 
-<!-- Firebase -->
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
   import { getDatabase, ref, onValue, update, set } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
@@ -528,19 +536,18 @@
   // ────────────────────────────────────────────────────────────────
 
   const app = initializeApp(FIREBASE_CONFIG);
-  const db = getDatabase(app);
+  const db  = getDatabase(app);
   const bedRef = ref(db, 'bedcheck');
 
-  let kinderen = [];
-  let bedStatus = {}; // { "Naam Achternaam": { inBed: true, time: "22:14" } }
-  let filter = 'all';
+  let kinderen  = [];
+  let statussen = {}; // { key: { state: 'none'|'forest'|'bed', forestTime, bedTime } }
+  let filter    = 'all';
 
-  // Load kids from Apps Script
+  // Load kids
   async function loadKinderen() {
     try {
       const res = await fetch(APPS_SCRIPT_URL);
       kinderen = await res.json();
-      document.getElementById('stat-total').textContent = kinderen.length;
       renderList();
     } catch(e) {
       document.getElementById('kids-list').innerHTML =
@@ -548,101 +555,122 @@
     }
   }
 
-  // Listen to Firebase realtime updates
-  onValue(bedRef, function(snapshot) {
-    bedStatus = snapshot.val() || {};
+  // Firebase realtime listener
+  onValue(bedRef, snap => {
+    statussen = snap.val() || {};
     updateStats();
-    renderList();
     updateRing();
+    renderList();
   });
 
   // Connection status
   import('https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js').then(({ ref: dbRef, onValue: onVal }) => {
-    const connRef = dbRef(db, '.info/connected');
-    onVal(connRef, (snap) => {
+    onVal(dbRef(db, '.info/connected'), snap => {
       const el = document.getElementById('conn-status');
-      if (snap.val()) {
-        el.innerHTML = '<span class="status-dot"></span> Live verbonden';
-        el.className = 'connection-status';
-      } else {
-        el.innerHTML = '<span class="status-dot"></span> Verbinding verbroken';
-        el.className = 'connection-status offline';
-      }
+      el.innerHTML = snap.val()
+        ? '<span class="status-dot"></span> Live verbonden'
+        : '<span class="status-dot"></span> Verbinding verbroken';
+      el.className = 'connection-status' + (snap.val() ? '' : ' offline');
     });
   });
 
-  function kidKey(k) {
-    return (k.voornaam + ' ' + k.achternaam).trim();
+  function kidKey(k) { return (k.voornaam + ' ' + k.achternaam).trim(); }
+
+  function now() {
+    const d = new Date();
+    return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
   }
 
-  window.toggleKid = function(key) {
-    var current = bedStatus[key] || { inBed: false };
-    var newVal = !current.inBed;
-    var now = new Date();
-    var timeStr = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
-    var updates = {};
-    updates[key] = { inBed: newVal, time: newVal ? timeStr : null };
+  // Toggle forest step
+  window.toggleForest = function(key) {
+    const s = statussen[key] || { state: 'none' };
+    // If already in bed, do nothing (can't un-forest someone who's in bed)
+    if (s.state === 'bed') return;
+    const updates = {};
+    if (s.state === 'none') {
+      updates[key] = { state: 'forest', forestTime: now(), bedTime: null };
+    } else {
+      // undo forest
+      updates[key] = { state: 'none', forestTime: null, bedTime: null };
+    }
+    update(bedRef, updates);
+  };
+
+  // Toggle bed step
+  window.toggleBed = function(key) {
+    const s = statussen[key] || { state: 'none' };
+    // Can only go to bed if already out of forest
+    if (s.state === 'none') return;
+    const updates = {};
+    if (s.state === 'forest') {
+      updates[key] = { state: 'bed', forestTime: s.forestTime, bedTime: now() };
+    } else if (s.state === 'bed') {
+      // undo bed (back to forest)
+      updates[key] = { state: 'forest', forestTime: s.forestTime, bedTime: null };
+    }
     update(bedRef, updates);
   };
 
   window.setFilter = function(f) {
     filter = f;
-    ['all','out','in'].forEach(function(x) {
-      document.getElementById('f-' + x).classList.toggle('active', x === f);
-    });
+    ['all','bos','forest','bed'].forEach(x =>
+      document.getElementById('f-' + x).classList.toggle('active', x === f)
+    );
     renderList();
   };
 
-  window.showReset = function() {
-    document.getElementById('modal').style.display = 'flex';
-  };
-
-  window.hideReset = function() {
-    document.getElementById('modal').style.display = 'none';
-  };
-
-  window.doReset = function() {
-    set(bedRef, {});
-    hideReset();
-  };
+  window.showReset  = () => document.getElementById('modal').style.display = 'flex';
+  window.hideReset  = () => document.getElementById('modal').style.display = 'none';
+  window.doReset    = () => { set(bedRef, {}); hideReset(); };
 
   function updateStats() {
-    var inBed = Object.values(bedStatus).filter(function(v){ return v && v.inBed; }).length;
-    var total = kinderen.length;
-    document.getElementById('stat-in').textContent = inBed;
-    document.getElementById('stat-out').textContent = total - inBed;
-    document.getElementById('stat-total').textContent = total;
+    const total  = kinderen.length;
+    const inBed  = Object.values(statussen).filter(v => v && v.state === 'bed').length;
+    const forest = Object.values(statussen).filter(v => v && v.state === 'forest').length;
+    const inBos  = total - inBed - forest;
+    document.getElementById('stat-bed').textContent    = inBed;
+    document.getElementById('stat-forest').textContent = forest;
+    document.getElementById('stat-bos').textContent    = Math.max(0, inBos);
+    document.getElementById('stat-total').textContent  = total;
   }
 
   function updateRing() {
-    var inBed = Object.values(bedStatus).filter(function(v){ return v && v.inBed; }).length;
-    var total = kinderen.length || 1;
-    var pct = inBed / total;
-    var circumference = 188.5;
-    var offset = circumference * (1 - pct);
-    document.getElementById('ring-fg').style.strokeDashoffset = offset;
-    document.getElementById('ring-pct').textContent = Math.round(pct * 100) + '%';
+    const total   = kinderen.length || 1;
+    const inBed   = Object.values(statussen).filter(v => v && v.state === 'bed').length;
+    const forest  = Object.values(statussen).filter(v => v && v.state === 'forest').length;
+    const C = 188.5;
+    // Orange ring: (inBed + forest) / total
+    const forestPct = (inBed + forest) / total;
+    document.getElementById('ring-forest').style.strokeDashoffset = C * (1 - forestPct);
+    // Green ring: inBed / total (layered on top)
+    const bedPct = inBed / total;
+    document.getElementById('ring-bed').style.strokeDashoffset = C * (1 - bedPct);
+    document.getElementById('ring-bed').style.opacity = '1';
+    document.getElementById('ring-pct').textContent = Math.round(bedPct * 100) + '%';
   }
 
   window.renderList = function() {
     if (!kinderen.length) return;
-    var query = document.getElementById('search').value.toLowerCase().trim();
+    const query = document.getElementById('search').value.toLowerCase().trim();
 
-    var filtered = kinderen.filter(function(k) {
-      var key = kidKey(k);
-      var status = bedStatus[key] || { inBed: false };
-      var matchSearch = !query || key.toLowerCase().includes(query);
-      var matchFilter = filter === 'all' ||
-        (filter === 'in' && status.inBed) ||
-        (filter === 'out' && !status.inBed);
+    let filtered = kinderen.filter(k => {
+      const key   = kidKey(k);
+      const s     = (statussen[key] || { state: 'none' }).state;
+      const matchSearch = !query || key.toLowerCase().includes(query);
+      const matchFilter =
+        filter === 'all' ||
+        (filter === 'bos'    && s === 'none') ||
+        (filter === 'forest' && s === 'forest') ||
+        (filter === 'bed'    && s === 'bed');
       return matchSearch && matchFilter;
     });
 
-    // Sort: not-in-bed first, then alphabetically
-    filtered.sort(function(a, b) {
-      var sa = (bedStatus[kidKey(a)] || {}).inBed ? 1 : 0;
-      var sb = (bedStatus[kidKey(b)] || {}).inBed ? 1 : 0;
-      if (sa !== sb) return sa - sb;
+    // Sort: none → forest → bed
+    const order = { none: 0, forest: 1, bed: 2 };
+    filtered.sort((a, b) => {
+      const sa = (statussen[kidKey(a)] || { state: 'none' }).state;
+      const sb = (statussen[kidKey(b)] || { state: 'none' }).state;
+      if (order[sa] !== order[sb]) return order[sa] - order[sb];
       return kidKey(a).localeCompare(kidKey(b));
     });
 
@@ -652,24 +680,60 @@
       return;
     }
 
-    var html = '';
-    filtered.forEach(function(k, i) {
-      var key = kidKey(k);
-      var status = bedStatus[key] || { inBed: false };
-      var isJ = k.geslacht && (k.geslacht.toLowerCase().startsWith('j') || k.geslacht.toLowerCase() === 'm');
-      var delay = Math.min(i * 0.03, 0.3);
+    let html = '';
+    filtered.forEach((k, i) => {
+      const key    = kidKey(k);
+      const status = statussen[key] || { state: 'none' };
+      const state  = status.state;
+      const isJ    = k.geslacht && (k.geslacht.toLowerCase().startsWith('j') || k.geslacht.toLowerCase() === 'm');
+      const delay  = Math.min(i * 0.03, 0.3);
 
-      html += '<div class="kid-row' + (status.inBed ? ' in-bed' : '') + '" ' +
-        'onclick="toggleKid(\'' + key.replace(/'/g, "\\'") + '\')" ' +
-        'style="animation-delay:' + delay + 's">' +
-        '<div class="checkbox">' + (status.inBed ? '✓' : '') + '</div>' +
-        '<div class="kid-info">' +
-          '<div class="kid-name">' + k.voornaam + ' ' + k.achternaam + '</div>' +
-          '<div class="kid-sub">' + (k.leeftijd ? k.leeftijd + ' jaar' : '') + '</div>' +
-        '</div>' +
-        '<span class="kid-badge ' + (isJ ? 'badge-j' : 'badge-m') + '">' + (k.geslacht || '?') + '</span>' +
-        '<div class="kid-time">' + (status.inBed && status.time ? status.time : '') + '</div>' +
-      '</div>';
+      const forestDone  = state === 'forest' || state === 'bed';
+      const bedDone     = state === 'bed';
+      const bedLocked   = state === 'none';
+
+      // Row state class
+      const rowClass = state === 'bed' ? 'state-bed' : state === 'forest' ? 'state-forest' : '';
+
+      // Status pills
+      let pillHtml = '';
+      if (state === 'none') {
+        pillHtml = '<span class="pill pill-none">🌳 In bos</span>';
+      } else if (state === 'forest') {
+        pillHtml = '<span class="pill pill-forest-done">🌲 Uit bos</span>';
+        if (status.forestTime) pillHtml += '<span class="pill-time">' + status.forestTime + '</span>';
+      } else {
+        pillHtml = '<span class="pill pill-bed">🛏️ In bed</span>';
+        if (status.bedTime) pillHtml += '<span class="pill-time">' + status.bedTime + '</span>';
+      }
+
+      html +=
+        '<div class="kid-row ' + rowClass + '" style="animation-delay:' + delay + 's">' +
+          // Two step buttons on the left
+          '<div class="step-btns">' +
+            '<button class="step-btn forest' + (forestDone ? ' done' : '') + '" ' +
+              'onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')" ' +
+              'title="' + (forestDone ? 'Ongedaan maken' : 'Uit bos') + '">' +
+              (forestDone ? '🌲' : '🌳') +
+            '</button>' +
+            '<button class="step-btn bed' + (bedDone ? ' done' : '') + (bedLocked ? ' locked' : '') + '" ' +
+              (bedLocked ? '' : 'onclick="toggleBed(\'' + key.replace(/'/g,"\\'") + '\')"') + ' ' +
+              'title="' + (bedLocked ? 'Eerst uit het bos halen' : bedDone ? 'Ongedaan maken' : 'Naar bed') + '">' +
+              (bedDone ? '🛏️' : '😴') +
+            '</button>' +
+          '</div>' +
+          '<div class="step-divider"></div>' +
+          // Kid info
+          '<div class="kid-body">' +
+            '<div class="kid-info">' +
+              '<div class="kid-name">' + k.voornaam + ' ' + k.achternaam + '</div>' +
+              '<div class="kid-sub">' + (k.leeftijd ? k.leeftijd + ' jaar · ' : '') +
+                '<span class="kid-badge ' + (isJ ? 'badge-j' : 'badge-m') + '">' + (k.geslacht||'?') + '</span>' +
+              '</div>' +
+            '</div>' +
+            '<div class="kid-status">' + pillHtml + '</div>' +
+          '</div>' +
+        '</div>';
     });
 
     document.getElementById('kids-list').innerHTML = html;
