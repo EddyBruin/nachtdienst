@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Kamp 2 – Bedcheck</title>
+  <title>Kamp 2 – Nachtdienst</title>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root {
@@ -442,7 +442,7 @@
     <div class="header-top">
       <div class="header-left">
         <div class="eyebrow">🏕️ Kamp 2</div>
-        <h1><span class="moon">🌙</span> Bed­check</h1>
+        <h1><span class="moon">🌙</span> Nachtdienst</h1>
         <div class="connection-status" id="conn-status">
           <span class="status-dot"></span> Verbinden…
         </div>
@@ -469,7 +469,7 @@
       </div>
       <div class="stat">
         <div class="stat-num orange" id="stat-forest">0</div>
-        <div class="stat-label">🌲 Uit bos</div>
+        <div class="stat-label">💩 Strafcorvee</div>
       </div>
       <div class="stat">
         <div class="stat-num mid"    id="stat-bos">0</div>
@@ -490,7 +490,7 @@
     <div class="filter-btns">
       <button class="filter-btn active" id="f-all"    onclick="setFilter('all')">Alle</button>
       <button class="filter-btn"        id="f-bos"    onclick="setFilter('bos')">🌳 Bos</button>
-      <button class="filter-btn"        id="f-forest" onclick="setFilter('forest')">💩 Uit bos</button>
+      <button class="filter-btn"        id="f-forest" onclick="setFilter('forest')">💩 Strafcorvee</button>
       <button class="filter-btn"        id="f-bed"    onclick="setFilter('bed')">🛏️ Bed</button>
     </div>
     <button class="btn-reset" onclick="showReset()">↺ Reset</button>
@@ -512,7 +512,7 @@
 <div class="modal-overlay" id="modal" style="display:none;">
   <div class="modal">
     <h2>Alles resetten?</h2>
-    <p>Dit zet alle kinderen terug naar "in het bos" op alle apparaten tegelijk.</p>
+    <p>Dit zet alle kinderen terug naar "in het bos" op alle apparaten tegelijk. Doe dit alleen als er een nieuwe dag is</p>
     <div class="modal-btns">
       <button class="btn-cancel" onclick="hideReset()">Annuleren</button>
       <button class="btn-confirm-reset" onclick="doReset()">Ja, reset alles</button>
