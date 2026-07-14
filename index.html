@@ -498,7 +498,7 @@
 
   <div class="legend">
     <div class="legend-item"><span class="legend-icon">🌳</span> Nog in het bos</div>
-    <div class="legend-item"><span class="legend-icon">🌲</span> Uit het bos, nog wakker</div>
+    <div class="legend-item"><span class="legend-icon">🌲</span> , nog wakker</div>
     <div class="legend-item"><span class="legend-icon">🛏️</span> In bed</div>
   </div>
 
@@ -709,15 +709,15 @@
       // Actieknoppen (dynamisch tonen afhankelijk van de status)
       let actionBtnsHtml = '<div class="action-btns">';
       if (state === 'none') {
-        // Enkel actie tonen om uit het bos te melden
-        actionBtnsHtml += '<button class="btn-action btn-forest" onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')">🌳 Uit het bos</button>';
+        // Enkel actie tonen om  te melden
+        actionBtnsHtml += '<button class="btn-action btn-forest" onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')">🌳 </button>';
       } else if (state === 'forest') {
         // Undo voor uit het bos OF actie naar bed
-        actionBtnsHtml += '<button class="btn-action btn-forest done" onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')" title="Ongedaan maken">↺ Uit het bos</button>';
+        actionBtnsHtml += '<button class="btn-action btn-forest done" onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')" title="Ongedaan maken">↺ Toch nog in het bos</button>';
         actionBtnsHtml += '<button class="btn-action btn-bed" onclick="toggleBed(\'' + key.replace(/'/g,"\\'") + '\')">🛏️ In bed</button>';
       } else if (state === 'bed') {
         // Enkel undo voor in bed tonen
-        actionBtnsHtml += '<button class="btn-action btn-bed done" onclick="toggleBed(\'' + key.replace(/'/g,"\\'") + '\')" title="Ongedaan maken">↺ In bed</button>';
+        actionBtnsHtml += '<button class="btn-action btn-bed done" onclick="toggleBed(\'' + key.replace(/'/g,"\\'") + '\')" title="Ongedaan maken">↺ Toch nog strafcorvee</button>';
       }
       actionBtnsHtml += '</div>';
 
