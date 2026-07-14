@@ -710,7 +710,7 @@
       let actionBtnsHtml = '<div class="action-btns">';
       if (state === 'none') {
         // Enkel actie tonen om  te melden
-        actionBtnsHtml += '<button class="btn-action btn-forest" onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')">🌳 </button>';
+        actionBtnsHtml += '<button class="btn-action btn-forest" onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')">🌳 Uit het bos</button>';
       } else if (state === 'forest') {
         // Undo voor uit het bos OF actie naar bed
         actionBtnsHtml += '<button class="btn-action btn-forest done" onclick="toggleForest(\'' + key.replace(/'/g,"\\'") + '\')" title="Ongedaan maken">↺ Toch nog in het bos</button>';
